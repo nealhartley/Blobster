@@ -26,7 +26,10 @@ public class AbsorptionController : MonoBehaviour {
 		//takes an object and checks whether it can be absorbed by the current object
 		int currLvl = currentMassAsLevel();
 
-		if(currLvl < other.GetComponents()){
+		//get the sizeLevel of the object that has been bumped into
+		Absorbable absorbScript = other.GetComponent<Absorbable>();
+
+		if(currLvl < absorbScript.getSizeLevel()){
 			//TODO: need to instantiate an object script that contains a method for fetching thier size level
 			return false;
 		}
