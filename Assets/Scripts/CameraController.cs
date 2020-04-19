@@ -40,11 +40,12 @@ public class CameraController : Observer {
 		
 	}
 
-	public override bool notify(float size){
+	public override bool notify(string notification){
 
-		return setDistance(size);
-
+		//return setDistance(size);
+		return true;
 	}
+
 
 	//TODO: smooth position change. lerp between positions
 	private bool setDistance(float size){

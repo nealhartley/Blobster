@@ -4,6 +4,6 @@ using UnityEngine;
 
 abstract public class Observer : MonoBehaviour {
 
-	abstract public bool notify(float size);
+	abstract public bool notify(string message);
 
 }
