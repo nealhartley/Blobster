@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AbsorptionController : MonoBehaviour {
 
-	public float scaleFactor = 0.1f;
+	public float scaleFactor = 0.05f;
 
 	private Vector3 currMass;
 	private Vector3 goalMass;
@@ -33,6 +33,7 @@ public class AbsorptionController : MonoBehaviour {
 			goalMass = goalMass + toAbsorb; //add to the goal mass so we begin scale cycle
 
 			absorbScript.absorb();//call their method to destroy them.
+			notify("eating");
 		}
 	}
 
@@ -61,7 +62,23 @@ public class AbsorptionController : MonoBehaviour {
 	//calc currentmass -> level
 	private int currentMassAsLevel(){
 		//works out the current mass of this object and equates that to a level it is allowed to eat
-		return (int)currMass.y;
+		float currentMass = currMass.y;
+		int level = 1;
+
+		if(currentMass < 2){
+			level = 1;
+		} else if(currentMass < 4){
+			level = 2;
+		} else if(currentMass < 8){
+			level = 3;
+		} else if(currentMass < 14){
+			level =4;
+		} else {
+			level = 5;
+		}
+
+		return level;
+		
 	}
 
 	private Vector3 currentMassAsVector3(){
@@ -73,11 +90,13 @@ public class AbsorptionController : MonoBehaviour {
 		// destroys the object it is absorbing
 
 	//notify observers
-	void notify () {	
+	void notify (string notification) {	
 		// let all observers know that they need updating
 
 		foreach(Observer i in observers){
 			//i.notify(currentMassAsFloat());
+			i.notify(notification);
+
 		}
 		
 	}
@@ -88,7 +107,7 @@ public class AbsorptionController : MonoBehaviour {
 			return; // if we are already at desired size just return
 		} 
 
-		this.transform.localScale += new Vector3(scaleFactor,scaleFactor, scaleFactor);
+		this.transform.localScale += new Vector3(scaleFactor,scaleFactor,scaleFactor);
 		currMass = this.transform.localScale;//update current scale
 
 	}

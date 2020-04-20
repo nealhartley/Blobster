@@ -9,7 +9,8 @@ public class AbsorbableLevelFour : Absorbable {
 		return sizeLevel;
 	}
 	public override Vector3 getMass(){
-		return this.transform.localScale;;
+		Vector3 mass = new Vector3(0.7f, 0.7f, 0.7f);
+		return mass;
 	}
 	public override void absorb(){
 		Destroy(gameObject);

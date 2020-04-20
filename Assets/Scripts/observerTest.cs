@@ -22,7 +22,7 @@ public class observerTest : MonoBehaviour {
 		}
 		
 		foreach(Observer i in observers){
-			i.notify(size);
+			i.notify(size.ToString());
 		}
 		count = 0;
 		size++;
